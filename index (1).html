@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sea Glass Cottage · Jacksonville Beach, FL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F5F0E8;
+      color: #1A3A4A;
+    }
+    .page-wrap { overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== TOKENS ===== */
+    :root {
+      --ocean:   #1A3A4A;
+      --sand:    #F5F0E8;
+      --amber:   #E8A857;
+      --teal:    #7BB8C4;
+      --white:   #FFFFFF;
+      --ocean-light: #2a5568;
+      --amber-dark: #c8882f;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 68px;
+      background: rgba(26, 58, 74, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--amber); font-style: italic; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-ctas { display: flex; gap: 0.75rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.2rem;
+      border-radius: 2px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-airbnb {
+      background: var(--amber);
+      color: var(--ocean);
+    }
+    .btn-airbnb:hover { background: var(--amber-dark); }
+    .btn-vrbo {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.45);
+    }
+    .btn-vrbo:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+    /* ===== FLOATING AVAILABILITY BUTTON ===== */
+    .float-avail {
+      position: fixed;
+      bottom: 1.75rem;
+      right: 1.75rem;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--teal);
+      color: var(--ocean);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.15rem;
+      border-radius: 2px;
+      box-shadow: 0 4px 20px rgba(26,58,74,0.25);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .float-avail:hover {
+      background: #6aaab8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(26,58,74,0.3);
+    }
+    .float-avail svg { flex-shrink: 0; }
+
+    /* ===== HERO ===== */
+    #home {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(26,58,74,0.35) 0%, rgba(26,58,74,0.1) 40%, rgba(26,58,74,0.55) 100%),
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1800&q=80') center/cover no-repeat;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      padding: 2rem;
+      padding-top: 68px;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.25rem;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: #b8dde6;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.82);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .hero-btns .btn {
+      padding: 0.85rem 2rem;
+      font-size: 0.82rem;
+    }
+    .hero-btns .btn-hero-airbnb {
+      background: var(--amber);
+      color: var(--ocean);
+    }
+    .hero-btns .btn-hero-airbnb:hover { background: var(--amber-dark); }
+    .hero-btns .btn-hero-vrbo {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.6);
+    }
+    .hero-btns .btn-hero-vrbo:hover { background: rgba(255,255,255,0.12); }
+
+    /* Signature wave divider */
+    .wave-divider {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      line-height: 0;
+    }
+    .wave-divider svg { width: 100%; height: 80px; }
+
+    /* ===== SCROLL INDICATOR ===== */
+    .scroll-hint {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.55);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.15); }
+    }
+
+    /* ===== FEATURES STRIP ===== */
+    .features-strip {
+      background: var(--ocean);
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 3.5rem;
+      flex-wrap: wrap;
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+    .feature-item svg { color: var(--teal); flex-shrink: 0; }
+
+    /* ===== SECTION WRAPPER ===== */
+    section { scroll-margin-top: 68px; }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2.5rem;
+    }
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ocean);
+      margin-bottom: 1.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--ocean-light); }
+    .section-body {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: #3a5568;
+      max-width: 600px;
+    }
+
+    /* ===== ABOUT / PROPERTY ===== */
+    #about { background: var(--sand); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-image-stack {
+      position: relative;
+    }
+    .about-img-main {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+    .about-img-accent {
+      position: absolute;
+      bottom: -2rem;
+      right: -2rem;
+      width: 55%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 2px;
+      border: 5px solid var(--sand);
+    }
+    .amenity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+    }
+    .amenity-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: #3a5568;
+    }
+    .amenity-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+    .about-ctas {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--amber);
+      color: var(--ocean);
+      padding: 0.85rem 2rem;
+    }
+    .btn-primary:hover { background: var(--amber-dark); }
+    .btn-outline {
+      background: transparent;
+      color: var(--ocean);
+      border: 1.5px solid var(--ocean);
+      padding: 0.85rem 2rem;
+    }
+    .btn-outline:hover { background: var(--ocean); color: var(--white); }
+
+    /* ===== GALLERY ===== */
+    #gallery { background: var(--white); }
+    .gallery-header { margin-bottom: 3rem; }
+    .masonry-grid {
+      columns: 3;
+      column-gap: 1rem;
+    }
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      border-radius: 2px;
+    }
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .masonry-item:hover img { transform: scale(1.04); }
+    .masonry-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(26,58,74,0);
+      transition: background 0.3s;
+    }
+    .masonry-item:hover .masonry-item-overlay { background: rgba(26,58,74,0.18); }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(10, 20, 30, 0.95);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 2px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      color: var(--white);
+      font-size: 2rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--white);
+      font-size: 2.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+      padding: 1rem;
+    }
+    .lightbox-nav:hover { opacity: 1; }
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+
+    /* ===== AVAILABILITY ===== */
+    #availability { background: var(--sand); }
+    .avail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .calendar-wrap {
+      background: var(--white);
+      border-radius: 2px;
+      padding: 2rem;
+      box-shadow: 0 4px 30px rgba(26,58,74,0.08);
+    }
+    .cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    .cal-month-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--ocean);
+    }
+    .cal-nav-btn {
+      background: none;
+      border: 1px solid rgba(26,58,74,0.2);
+      color: var(--ocean);
+      width: 32px;
+      height: 32px;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .cal-nav-btn:hover { background: var(--ocean); color: var(--white); }
+    .cal-days-header {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      margin-bottom: 0.5rem;
+    }
+    .cal-day-name {
+      text-align: center;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #7a9aaa;
+      padding: 0.25rem;
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3px;
+    }
+    .cal-cell {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 400;
+      border-radius: 2px;
+      cursor: default;
+    }
+    .cal-cell.empty { background: transparent; }
+    .cal-cell.available {
+      color: var(--ocean);
+      background: rgba(123,184,196,0.12);
+    }
+    .cal-cell.available:hover {
+      background: rgba(123,184,196,0.3);
+      cursor: pointer;
+    }
+    .cal-cell.booked {
+      background: rgba(232,168,87,0.15);
+      color: #aaa;
+      text-decoration: line-through;
+      cursor: not-allowed;
+    }
+    .cal-cell.today {
+      background: var(--teal);
+      color: var(--white);
+      font-weight: 600;
+    }
+    .cal-cell.past {
+      color: #ccc;
+      cursor: not-allowed;
+    }
+    .cal-cell-loading {
+      animation: calPulse 1.6s ease-in-out infinite;
+    }
+    @keyframes calPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .cal-legend {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(26,58,74,0.08);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      color: #5a7a8a;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 1px;
+    }
+    .legend-dot.available { background: rgba(123,184,196,0.4); border: 1px solid var(--teal); }
+    .legend-dot.booked { background: rgba(232,168,87,0.3); border: 1px solid var(--amber); }
+    .avail-sidebar { }
+    .avail-note {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #3a5568;
+      margin-bottom: 2rem;
+    }
+    .avail-rules {
+      margin-top: 2rem;
+      border-top: 1px solid rgba(26,58,74,0.1);
+      padding-top: 2rem;
+    }
+    .rule-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(26,58,74,0.06);
+      font-size: 0.85rem;
+    }
+    .rule-label { color: #7a9aaa; }
+    .rule-val { color: var(--ocean); font-weight: 500; }
+    .avail-ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+    }
+    .avail-ctas .btn {
+      width: 100%;
+      justify-content: center;
+      padding: 1rem;
+      font-size: 0.82rem;
+    }
+    .avail-ctas .btn-primary { background: var(--amber); color: var(--ocean); }
+    .avail-ctas .btn-primary:hover { background: var(--amber-dark); }
+    .avail-ctas .btn-outline { border: 1.5px solid var(--ocean); color: var(--ocean); }
+    .avail-ctas .btn-outline:hover { background: var(--ocean); color: var(--white); }
+
+    /* ===== CONTACT ===== */
+    #contact { background: var(--ocean); }
+    #contact .section-label { color: var(--teal); }
+    #contact .section-title { color: var(--white); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-intro {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 2.5rem;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-icon {
+      width: 38px;
+      height: 38px;
+      background: rgba(123,184,196,0.15);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--teal);
+    }
+    .contact-detail-text { }
+    .contact-detail-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.25rem;
+    }
+    .contact-detail-val {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.85);
+    }
+    /* Contact form */
+    .contact-form { }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.45rem;
+    }
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 2px;
+      padding: 0.75rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus { border-color: var(--teal); }
+    .form-textarea { resize: vertical; min-height: 110px; }
+    .form-select option { background: var(--ocean); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-submit {
+      width: 100%;
+      background: var(--amber);
+      color: var(--ocean);
+      padding: 0.95rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .form-submit:hover { background: var(--amber-dark); }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      color: var(--teal);
+      font-size: 1rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0f2330;
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.04em;
+    }
+    .footer-logo span { color: var(--amber); font-style: italic; }
+    .footer-loc {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .footer-links a {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--teal); }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .about-grid,
+      .avail-grid,
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-img-accent { display: none; }
+      .masonry-grid { columns: 2; }
+      .section-inner { padding: 4rem 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .masonry-grid { columns: 1; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.8rem; }
+    }
+
+    /* ===== MOBILE MENU ===== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0.25rem;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 1px;
+      transition: all 0.25s;
+    }
+    @media (max-width: 900px) {
+      .hamburger { display: flex; }
+      .mobile-menu {
+        position: fixed;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: rgba(26,58,74,0.97);
+        backdrop-filter: blur(16px);
+        padding: 1.5rem;
+        z-index: 99;
+        display: none;
+        flex-direction: column;
+        gap: 1.25rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+      }
+      .mobile-menu.open { display: flex; }
+      .mobile-menu a {
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.8);
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+      }
+      .mobile-menu-btns { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem; }
+      .mobile-menu-btns .btn { width: 100%; justify-content: center; padding: 0.85rem; }
+    }
+
+    /* Smooth fade-in on scroll */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<div class="page-wrap">
+<nav>
+  <a href="#home" class="nav-logo">Sea Glass <span>Cottage</span></a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#availability">Availability</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-ctas">
+    <a href="https://www.airbnb.com" target="_blank" class="btn btn-airbnb">Book on Airbnb</a>
+    <a href="https://www.vrbo.com" target="_blank" class="btn btn-vrbo">Book on VRBO</a>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="#gallery" onclick="closeMenu()">Gallery</a>
+  <a href="#availability" onclick="closeMenu()">Availability</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <div class="mobile-menu-btns">
+    <a href="https://www.airbnb.com" target="_blank" class="btn btn-airbnb">Book on Airbnb</a>
+    <a href="https://www.vrbo.com" target="_blank" class="btn btn-vrbo">Book on VRBO</a>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Jacksonville Beach, Florida</p>
+    <h1 class="hero-title">Where the <em>ocean</em><br>waits for you</h1>
+    <p class="hero-sub">A light-filled coastal retreat steps from the Atlantic — your private escape on Florida's First Coast.</p>
+    <div class="hero-btns">
+      <a href="https://www.airbnb.com" target="_blank" class="btn btn-hero-airbnb btn">Book on Airbnb</a>
+      <a href="https://www.vrbo.com" target="_blank" class="btn btn-hero-vrbo btn">Book on VRBO</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#F5F0E8"/>
+    </svg>
+  </div>
+</section>
+
+<!-- Features Strip -->
+<div class="features-strip">
+  <div class="feature-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    3 Bedrooms · 2 Baths
+  </div>
+  <div class="feature-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    2 Blocks to Beach
+  </div>
+  <div class="feature-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="22" height="13" rx="2" ry="2"/><polyline points="8 21 12 17 16 21"/><line x1="12" y1="17" x2="12" y2="13"/></svg>
+    High-Speed WiFi
+  </div>
+  <div class="feature-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+    Fully Equipped Kitchen
+  </div>
+  <div class="feature-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h1a4 4 0 0 0 4-4V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v8a4 4 0 0 0 4 4z"/><path d="M13 17h1a4 4 0 0 0 4-4V5a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v8a4 4 0 0 0 4 4z"/></svg>
+    Free Parking
+  </div>
+  <div class="feature-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    Sleeps 8 Guests
+  </div>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-image-stack fade-in">
+        <img class="about-img-main" 
+          src="https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=800&q=80" 
+          alt="Sea Glass Cottage living room" />
+        <img class="about-img-accent" 
+          src="https://images.unsplash.com/photo-1586105449897-20b5efeb3233?w=500&q=80" 
+          alt="Cottage deck view" />
+      </div>
+      <div class="fade-in">
+        <p class="section-label">The Property</p>
+        <h2 class="section-title">Sun-soaked days,<br><em>salt-air evenings</em></h2>
+        <p class="section-body">
+          Sea Glass Cottage is a beautifully updated coastal home on Florida's First Coast — just two blocks from the Atlantic in the heart of Jacksonville Beach. Three bright bedrooms, two full baths, an open-concept living space, and a shaded backyard deck make it the perfect base for a beach getaway.
+        </p>
+        <p class="section-body" style="margin-top:1rem;">
+          Morning coffee on the porch. Afternoons on the sand. Evenings on the deck watching the sky turn amber. Everything you came for — without the resort crowds.
+        </p>
+        <div class="amenity-grid">
+          <div class="amenity-item"><span class="amenity-dot"></span> Beach chairs & umbrellas</div>
+          <div class="amenity-item"><span class="amenity-dot"></span> Outdoor shower</div>
+          <div class="amenity-item"><span class="amenity-dot"></span> Smart TVs in all rooms</div>
+          <div class="amenity-item"><span class="amenity-dot"></span> Washer & dryer</div>
+          <div class="amenity-item"><span class="amenity-dot"></span> Gas grill & dining patio</div>
+          <div class="amenity-item"><span class="amenity-dot"></span> Self check-in</div>
+          <div class="amenity-item"><span class="amenity-dot"></span> Air conditioning</div>
+          <div class="amenity-item"><span class="amenity-dot"></span> Pet-friendly (ask)</div>
+        </div>
+        <div class="about-ctas">
+          <a href="https://www.airbnb.com" target="_blank" class="btn btn-primary">Book on Airbnb</a>
+          <a href="https://www.vrbo.com" target="_blank" class="btn btn-outline">Book on VRBO</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery">
+  <div class="section-inner">
+    <div class="gallery-header fade-in">
+      <p class="section-label">Gallery</p>
+      <h2 class="section-title">See every <em>corner</em></h2>
+    </div>
+    <div class="masonry-grid" id="galleryGrid">
+      <!-- Images injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+  <img id="lightboxImg" src="" alt="" />
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">›</button>
+</div>
+
+<!-- ===== AVAILABILITY ===== -->
+<section id="availability">
+  <div class="section-inner">
+    <div class="avail-grid">
+      <div class="fade-in">
+        <p class="section-label">Availability</p>
+        <h2 class="section-title">Plan your <em>stay</em></h2>
+        <p class="avail-note">
+          Check open dates below and book directly through Airbnb or VRBO — both platforms are kept in sync. Reach out if you have questions about specific dates or a longer stay.
+        </p>
+        <div class="avail-rules">
+          <div class="rule-item">
+            <span class="rule-label">Minimum Stay</span>
+            <span class="rule-val">2 nights</span>
+          </div>
+          <div class="rule-item">
+            <span class="rule-label">Check-in</span>
+            <span class="rule-val">4:00 PM</span>
+          </div>
+          <div class="rule-item">
+            <span class="rule-label">Check-out</span>
+            <span class="rule-val">11:00 AM</span>
+          </div>
+          <div class="rule-item">
+            <span class="rule-label">Nightly Rate (avg)</span>
+            <span class="rule-val">From $195 / night</span>
+          </div>
+          <div class="rule-item">
+            <span class="rule-label">Peak Season</span>
+            <span class="rule-val">June – August</span>
+          </div>
+        </div>
+        <div class="avail-ctas">
+          <a href="https://www.airbnb.com" target="_blank" class="btn btn-primary">Check Airbnb Calendar</a>
+          <a href="https://www.vrbo.com" target="_blank" class="btn btn-outline">Check VRBO Calendar</a>
+        </div>
+      </div>
+      <div class="calendar-wrap fade-in">
+        <div class="cal-header">
+          <button class="cal-nav-btn" onclick="prevMonth()">‹</button>
+          <span class="cal-month-label" id="calMonthLabel"></span>
+          <button class="cal-nav-btn" onclick="nextMonth()">›</button>
+        </div>
+        <div class="cal-days-header">
+          <div class="cal-day-name">Su</div>
+          <div class="cal-day-name">Mo</div>
+          <div class="cal-day-name">Tu</div>
+          <div class="cal-day-name">We</div>
+          <div class="cal-day-name">Th</div>
+          <div class="cal-day-name">Fr</div>
+          <div class="cal-day-name">Sa</div>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-legend">
+          <div class="legend-item">
+            <div class="legend-dot available"></div> Available
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot booked"></div> Booked
+          </div>
+        </div>
+        <p id="calStatus" style="font-size:0.72rem;margin-top:1rem;line-height:1.5;transition:color 0.3s;">
+          Loading live availability…
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="fade-in">
+        <p class="section-label">Contact</p>
+        <h2 class="section-title" style="color:var(--white)">Book direct <em style="color:#b8dde6">&amp; save</em></h2>
+        <p class="contact-intro">Have a question before booking? Want to ask about longer stays, pet policies, or a special occasion? We'd love to hear from you.</p>
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <div class="contact-detail-label">Location</div>
+            <div class="contact-detail-val">Jacksonville Beach, Florida 32250</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <div class="contact-detail-label">Email</div>
+            <div class="contact-detail-val">hello@seaglasscottage.com</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.66 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="contact-detail-text">
+            <div class="contact-detail-label">Phone / Text</div>
+            <div class="contact-detail-val">(904) 555-0182</div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in">
+        <div class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input class="form-input" type="text" placeholder="Jane" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input class="form-input" type="text" placeholder="Smith" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" placeholder="jane@example.com" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Check-in</label>
+              <input class="form-input" type="date" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Check-out</label>
+              <input class="form-input" type="date" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Guests</label>
+            <select class="form-input form-select">
+              <option value="">Select guests</option>
+              <option>1–2 guests</option>
+              <option>3–4 guests</option>
+              <option>5–6 guests</option>
+              <option>7–8 guests</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" placeholder="Any questions or special requests..."></textarea>
+          </div>
+          <button class="form-submit" onclick="submitForm()">Send Message</button>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 1rem;display:block;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--white);margin-bottom:0.5rem;">Message sent!</p>
+          <p style="font-size:0.88rem;color:rgba(255,255,255,0.55);">We'll be in touch within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-logo">Sea Glass <span>Cottage</span></div>
+  <p class="footer-loc">Jacksonville Beach · Florida · Est. 2019</p>
+  <ul class="footer-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#availability">Availability</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://www.airbnb.com" target="_blank">Airbnb</a></li>
+    <li><a href="https://www.vrbo.com" target="_blank">VRBO</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Sea Glass Cottage. All rights reserved.</p>
+</footer>
+</div><!-- /page-wrap -->
+
+<!-- ===== FLOATING AVAILABILITY BUTTON ===== -->
+<a href="#availability" class="float-avail">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+  Check Availability
+</a>
+
+<script>
+// ===== GALLERY DATA =====
+const galleryPhotos = [
+  { url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80', alt: 'Beach at sunrise' },
+  { url: 'https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=800&q=80', alt: 'Living room' },
+  { url: 'https://images.unsplash.com/photo-1586105449897-20b5efeb3233?w=800&q=80', alt: 'Deck view' },
+  { url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80', alt: 'Property exterior' },
+  { url: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80', alt: 'Kitchen' },
+  { url: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800&q=80', alt: 'Master bedroom' },
+  { url: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=800&q=80', alt: 'Bathroom' },
+  { url: 'https://images.unsplash.com/photo-1599619351208-3e6c839d6828?w=800&q=80', alt: 'Backyard' },
+  { url: 'https://images.unsplash.com/photo-1560185007-5f0bb1866cab?w=800&q=80', alt: 'Bedroom two' },
+  { url: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=800&q=80', alt: 'Dining area' },
+  { url: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80', alt: 'House at dusk' },
+  { url: 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&q=80', alt: 'Ocean view nearby' },
+];
+
+// Build gallery
+const grid = document.getElementById('galleryGrid');
+galleryPhotos.forEach((photo, i) => {
+  const item = document.createElement('div');
+  item.className = 'masonry-item';
+  item.innerHTML = `<img src="${photo.url}" alt="${photo.alt}" loading="lazy" /><div class="masonry-item-overlay"></div>`;
+  item.addEventListener('click', () => openLightbox(i));
+  grid.appendChild(item);
+});
+
+// ===== LIGHTBOX =====
+let currentImg = 0;
+function openLightbox(i) {
+  currentImg = i;
+  document.getElementById('lightboxImg').src = galleryPhotos[i].url;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function lightboxNav(dir) {
+  currentImg = (currentImg + dir + galleryPhotos.length) % galleryPhotos.length;
+  document.getElementById('lightboxImg').src = galleryPhotos[currentImg].url;
+}
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+  if (e.key === 'ArrowRight') lightboxNav(1);
+});
+
+// ===== CALENDAR =====
+const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const today = new Date();
+let calYear  = today.getFullYear();
+let calMonth = today.getMonth();
+
+// Booked date ranges fetched from /api/calendar
+// Each entry: { start: 'YYYY-MM-DD', end: 'YYYY-MM-DD' }
+let bookedRanges = [];
+let calendarLoading = true;
+let calendarError   = false;
+
+/** Expand booked ranges into a Set of 'YYYY-MM-DD' strings for fast lookup */
+function buildBookedSet(ranges) {
+  const set = new Set();
+  for (const { start, end } of ranges) {
+    const s = new Date(start + 'T00:00:00');
+    const e = new Date(end   + 'T00:00:00');
+    // iCal DTEND is exclusive, so iterate start <= d < end
+    for (let d = new Date(s); d < e; d.setDate(d.getDate() + 1)) {
+      set.add(d.toISOString().slice(0, 10));
+    }
+  }
+  return set;
+}
+
+function renderCalendar() {
+  const label = document.getElementById('calMonthLabel');
+  const grid  = document.getElementById('calGrid');
+  const status = document.getElementById('calStatus');
+
+  label.textContent = `${monthNames[calMonth]} ${calYear}`;
+  grid.innerHTML = '';
+
+  // Show loading / error state
+  if (status) {
+    if (calendarLoading) {
+      status.textContent = 'Loading live availability…';
+      status.style.color = 'var(--teal)';
+    } else if (calendarError) {
+      status.textContent = 'Could not load live dates — check Airbnb or VRBO for accuracy.';
+      status.style.color = '#e07070';
+    } else {
+      status.textContent = 'Live availability synced from Airbnb & VRBO.';
+      status.style.color = 'var(--teal)';
+    }
+  }
+
+  const todayStr = today.toISOString().slice(0, 10);
+  const bookedSet = buildBookedSet(bookedRanges);
+
+  const firstDay    = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+  for (let i = 0; i < firstDay; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell empty';
+    grid.appendChild(cell);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const cell = document.createElement('div');
+    cell.textContent = d;
+
+    if (dateStr === todayStr) {
+      cell.className = 'cal-cell today';
+    } else if (dateStr < todayStr) {
+      cell.className = 'cal-cell past';
+    } else if (bookedSet.has(dateStr)) {
+      cell.className = 'cal-cell booked';
+    } else {
+      cell.className = calendarLoading ? 'cal-cell available cal-cell-loading' : 'cal-cell available';
+    }
+    grid.appendChild(cell);
+  }
+}
+
+function prevMonth() {
+  calMonth--;
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  renderCalendar();
+}
+function nextMonth() {
+  calMonth++;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  renderCalendar();
+}
+
+// Initial render with loading state
+renderCalendar();
+
+// Fetch live data from Vercel API route
+async function loadCalendar() {
+  try {
+    const res = await fetch('/api/calendar');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    bookedRanges   = data.bookedRanges || [];
+    calendarLoading = false;
+    calendarError   = false;
+  } catch (err) {
+    console.warn('Calendar sync failed:', err.message);
+    calendarLoading = false;
+    calendarError   = true;
+  }
+  renderCalendar();
+}
+
+loadCalendar();
+
+// ===== MOBILE MENU =====
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// ===== CONTACT FORM =====
+function submitForm() {
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+
+// ===== SCROLL FADE-IN =====
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+fadeEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
