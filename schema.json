@@ -5,15 +5,15 @@
       "@type": "VacationRental",
       "@id": "https://surflinejaxbeach.com/#property",
       "name": "Surfline 8th Avenue So. — Oceanfront Jax Beach",
-      "description": "A 3rd-floor direct beachfront condo in the Sandpiper building, Jacksonville Beach, Florida. Boasting panoramic ocean views from the living room and front bedroom, a private beachfront balcony, updated kitchen, and access to a gated outdoor pool. Just 8 blocks from downtown Jacksonville Beach. Rated 5.0 stars with 43 reviews on Airbnb.",
+      "description": "A 3rd-floor direct beachfront condo in the Sandpiper building, Jacksonville Beach, Florida. Boasting panoramic ocean views from the living room and front bedroom. Just 8 blocks from downtown Jacksonville Beach. Rated 5.0 stars with 43 reviews on Airbnb.",
       "url": "https://surflinejaxbeach.com",
       "image": [
-        "https://surflinejaxbeach.com/images/hero.jpg",
-        "https://surflinejaxbeach.com/images/balcony.jpg",
-        "https://surflinejaxbeach.com/images/living-room.jpg",
-        "https://surflinejaxbeach.com/images/bedroom.jpg",
-        "https://surflinejaxbeach.com/images/kitchen.jpg",
-        "https://surflinejaxbeach.com/images/pool.jpg"
+        "https://surflinejaxbeach.com/assets/unnamed-15.jpg",
+        "https://surflinejaxbeach.com/assets/unnamed-14.jpg",
+        "https://surflinejaxbeach.com/assets/unnamed-13.jpg",
+        "https://surflinejaxbeach.com/assets/unnamed-12.jpg",
+        "https://surflinejaxbeach.com/assets/unnamed-11.jpg",
+        "https://surflinejaxbeach.com/assets/unnamed-10.jpg"
       ],
       "address": {
         "@type": "PostalAddress",
@@ -82,10 +82,10 @@
       "offers": {
         "@type": "Offer",
         "priceCurrency": "USD",
-        "price": "266",
+        "price": "250",
         "priceSpecification": {
           "@type": "UnitPriceSpecification",
-          "price": "266",
+          "price": "250",
           "priceCurrency": "USD",
           "unitText": "night",
           "description": "Average nightly rate — final price varies by season and length of stay"
